@@ -25,7 +25,6 @@ app.get('/weather', getWeather)
 
 function getWeather(request, response) {
 
-  const cityName = request.query.searchQuery;
   const lat = request.query.lat;
   const lon = request.query.lon;
 
@@ -35,7 +34,7 @@ function getWeather(request, response) {
       .then(result => {
         let mappedData = [];
         result.data.data.map(day => {
-          mappedData.push(new Forecast(day.valid_date, day.weather.description, day.low_temp, day.high_temp))
+          mappedData.push(new Forecast(day))
         });
         response.send(mappedData);
       });
@@ -45,38 +44,40 @@ function getWeather(request, response) {
   };
 };
 
-function Forecast(date, description, lowTemp, highTemp) {
-  this.date = date;
-  this.description = description;
-  this.lowTemp = lowTemp;
-  this.highTemp = highTemp;
+function Forecast(day) {
+  this.date = day.valid_date;
+  this.description = day.weather.description;
+  this.lowTemp = day.low_temp;
+  this.highTemp = day.high_temp;
 };
 
 app.get('/movie', getMovie)
 
 function getMovie(request, response) {
-  const cityName = request.query.searchQuery;
+  const cityName = request.query.searchQuery.split(' ')[0];
 
   if (cityName) {
     axios.get(`http://api.themoviedb.org/3/search/movie?api_key=${MOVIE_API_KEY}&query=${cityName}`)
       .then(result => {
         let mappedData = [];
-        result.data.results.map(movie => {
-          mappedData.push(new MovieList(movie.original_title, movie.overview, movie.release_date, movie.poster_path))
+
+        const movieToShow = result.data.results.filter(movie => movie.poster_path)
+
+        movieToShow.map(movie => {
+          mappedData.push(new MovieList(movie))
         });
         response.send(mappedData);
-        console.log(mappedData);
       });
   } else {
     response.status(500).send('Sorry this city was not found <br /> Please check the spelling of the city and try again.');
   };
 };
 
-function MovieList(title, overview, release_date, poster_path) {
-  this.title = title;
-  this.overview = overview;
-  this.release_date = release_date;
-  this.poster_path = poster_path;
+function MovieList(movie) {
+  this.title = movie.original_title;
+  this.overview = movie.overview;
+  this.release_date = movie.release_date;
+  this.poster_path = 'https://image.tmdb.org/t/p/w500' + movie.poster_path;
 };
 
 app.get('/*', (request, response) => {
