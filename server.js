@@ -11,15 +11,13 @@ require('dotenv').config();
 
 const PORT = process.env.PORT;
 
-const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
-
-const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
-
 const getHome = require('./modules/getHome');
 
 const getWeather = require('./modules/getWeather');
 
 const getMovie = require('./modules/getMovie');
+
+const getCatchAll = require('./modules/getCatchAll');
 
 app.get('/', getHome);
   
