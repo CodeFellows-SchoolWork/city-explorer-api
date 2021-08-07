@@ -4,6 +4,8 @@ module.exports = getMovie;
 
 const axios = require('axios');
 
+const MOVIE_API_KEY = process.env.MOVIE_API_KEY;
+
 function getMovie(request, response) {
   const cityName = request.query.searchQuery.split(' ')[0];
 

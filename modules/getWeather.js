@@ -4,6 +4,8 @@ module.exports = getWeather;
 
 const axios = require('axios');
 
+const WEATHER_API_KEY = process.env.WEATHER_API_KEY;
+
 function getWeather(request, response) {
 
   const lat = request.query.lat;
