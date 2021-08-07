@@ -81,7 +81,7 @@ function MovieList(movie) {
 };
 
 app.get('/*', (request, response) => {
-  response.status(404).send('Sorry the page is not found, <br> Please refresh the page <br> OR <br> return to http://localhost:3001/weather.')
+  response.status(404).send('Sorry the page is not found, <br> Please refresh the page <br> OR <br> return to http://localhost:3001/.')
 });
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
