@@ -25,3 +25,10 @@
 >>>>>>**Key requirements:** Build an abi that when called sends information from the backend to the front end for the client is see the requested data.
 
 ![image](./uml.png)
+
+>**Lab:** #10, **Feature:** 1: Add Cache,
+>>**Estimate amount of time needed to complete:** 4 Hr,
+>>>**Start time:** Tues Aug-11,
+>>>>**Finish time:** #,
+>>>>>**Actual time needed to complete:** #,
+>>>>>>**Key requirements:** Add demo code, Fix bugs and add cache to movie and weather API calls so that we reduce the amount of times we hit the our Api's to stay within lower cost brackets.
