@@ -18,6 +18,7 @@ async function getMovie(request, response) {
   if (cache[key] && (Date.now() - cache[key].timestamp < 50000)) {
     console.log('Cache hit');
     return cache[key].data;
+
   } if (!cache[key]) {
     console.log('Cache miss');
     cache[key] = {};
@@ -34,6 +35,7 @@ async function getMovie(request, response) {
 
     cache[key].data = mappedData;
     response.send(mappedData);
+    
   } else {
     response.status(500).send('Sorry this city was not found <br /> Please check the spelling of the city and try again.');
   };
